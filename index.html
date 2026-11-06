@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Page</title>
+    
+    <!-- Tailwind CSS & FontAwesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700;800&family=Dancing+Script:wght@500;700&family=Titan+One&family=Sriracha&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ================= GLOBAL FULLSCREEN CONTAINER STYLES ================= */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden; /* Disable general page scrolling */
+            background-color: #0f172a;
+        }
+
+        .main-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            overflow-y: auto; /* Allow internal scrolling if content is taller than screen */
+        }
+
+        .main-section.active {
+            display: flex;
+            opacity: 1;
+            z-index: 10;
+        }
+
+        /* ================= SECTION 1 STYLES ================= */
+        #section-1 {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('hack.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            justify-content: center;
+            align-items: center;
+        }
+        #section-1 .card {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 350px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #section-1 h2 { margin-bottom: 20px; font-size: 22px; }
+        #section-1 .btn-group {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        #section-1 .btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        #section-1 .btn-yes { background-color: #22c55e; color: white; }
+        #section-1 .btn-yes:hover { background-color: #16a34a; }
+        #section-1 .btn-no { background-color: #ef4444; color: white; }
+        #section-1 .btn-no:hover { background-color: #dc2626; }
+
+        #section-1 .profile-container {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 15px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #3b82f6;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+            background: #000;
+        }
+        #section-1 .profile-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #section-1 .camera-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #3b82f6;
+            background: #000;
+        }
+        #section-1 video, #section-1 canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+        }
+        #section-1 .action-btn {
+            background-color: #3b82f6;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 15px;
+            transition: 0.2s;
+        }
+        #section-1 .action-btn:disabled {
+            background-color: #64748b;
+            cursor: not-allowed;
+        }
+
+        #section-1 .next-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            color: #0f172a;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 255, 135, 0.4);
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        #section-1 .next-btn:hover {
+            background: linear-gradient(135deg, #60efff, #00ff87);
+            box-shadow: 0 0 20px rgba(96, 239, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
+        #section-1 .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        #section-1 .status-msg {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        #section-1 .success-box {
+            color: #22c55e;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        #section-1 .success-sub {
+            font-size: 18px;
+            color: #ffffff;
+            margin-top: 10px;
+        }
+        #section-1 .error-box {
+            color: #ef4444;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        #section-1 .error-sub {
+            font-size: 16px;
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+
+
+        /* ================= SECTION 2 STYLES ================= */
+        #section-2 {
+            background-image: url('mylove.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #section-2::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+        #section-2 .s2-page, #section-2 .fb-logo-container, #section-2 .wrapper-container, #section-2 .login-box, #section-2 #error-alert-s2 {
+            position: relative;
+            z-index: 1;
+        }
+        #section-2 .s2-page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            animation: fadeInS2 0.5s ease-in-out;
+        }
+        #section-2 .s2-page.active {
+            display: flex;
+        }
+        @keyframes fadeInS2 {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        #section-2 .wrapper-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin-bottom: 35px;
+            animation: floatUpDownS2 3s ease-in-out infinite;
+        }
+        @keyframes floatUpDownS2 {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        #section-2 .balloon-card-system {
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            width: 320px;
+            height: 280px;
+        }
+        #section-2 .image-card {
+            position: absolute;
+            bottom: 0;
+            background: white;
+            padding: 8px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            z-index: 2;
+        }
+        #section-2 .image-card img {
+            width: 240px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+        }
+        #section-2 .left-balloon-group {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            z-index: 1;
+            animation: swingLeftS2 3s ease-in-out infinite alternate;
+            transform-origin: bottom center;
+        }
+        @keyframes swingLeftS2 {
+            0% { transform: rotate(-3deg); }
+            100% { transform: rotate(3deg); }
+        }
+        #section-2 .right-balloon-group {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 1;
+            animation: swingRightS2 3s ease-in-out infinite alternate;
+            transform-origin: bottom center;
+        }
+        @keyframes swingRightS2 {
+            0% { transform: rotate(3deg); }
+            100% { transform: rotate(-3deg); }
+        }
+        #section-2 .balloon-png {
+            width: 60px;
+            height: auto;
+            display: block;
+        }
+        #section-2 .fb-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        #section-2 .fb-logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ff4081;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        #section-2 .site-title {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        #section-2 .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        #section-2 .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        #section-2 .input-group input, #section-2 .input-group select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+            background-color: #fff;
+        }
+        #section-2 .input-group input:focus, #section-2 .input-group select:focus {
+            border-color: #ff4081;
+            box-shadow: 0 0 0 2px rgba(255, 64, 129, 0.2);
+        }
+        #section-2 .btn-s2 {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(255, 64, 129, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        #section-2 .btn-s2:hover { background-color: #e03570; }
+        #section-2 .btn-s2.success {
+            background-color: #28a745 !important;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4) !important;
+        }
+        #section-2 .spinner-s2 {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spinS2 0.8s linear infinite;
+        }
+        @keyframes spinS2 {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #section-2 .success-tick {
+            width: 22px;
+            height: 22px;
+            background-color: white;
+            color: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        #section-2 #error-alert-s2 {
+            display: none;
+            background-color: #ff5252;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            width: 100%;
+            max-width: 380px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(255, 82, 82, 0.4);
+            animation: shakeS2 0.4s ease-in-out;
+        }
+        @keyframes shakeS2 {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-6px); }
+            80% { transform: translateX(6px); }
+            100% { transform: translateX(0); }
+        }
+
+
+        /* ================= SECTION 3 STYLES ================= */
+        #section-3 {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top, #ffdde8, #ffe9f2, #ffd1dc, #17001f);
+            align-items: center;
+            justify-content: center;
+            -webkit-font-smoothing: antialiased;
+            position: absolute;
+            flex-direction: column;
+        }
+        #section-3 .font-love { font-family: 'Pacifico', cursive; }
+
+        #section-3 .heart {
+            position: fixed;
+            bottom: -40px;
+            color: rgba(255, 70, 130, 0.8);
+            animation: floatHeart linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+        @keyframes floatHeart {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+            15% { opacity: 1; }
+            100% { transform: translateY(-105vh) rotate(360deg) scale(1.8); opacity: 0; }
+        }
+
+        #section-3 .sparkle {
+            position: fixed;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 15px white;
+            animation: sparkle 2s infinite ease-in-out;
+            z-index: 2;
+            pointer-events: none;
+        }
+        @keyframes sparkle {
+            0%, 100% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        #section-3 .screen-box {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            padding: 45px 35px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 30px 70px rgba(121, 0, 65, 0.35);
+            border-radius: 2.8rem;
+            text-align: center;
+            display: none;
+            z-index: 10;
+            margin: auto;
+        }
+        #section-3 .screen-box.active {
+            display: block;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        #section-3 .gif-container {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 22px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #section-3 .gif-container img, #section-3 .gif-container .tenor-gif-embed {
+            max-width: 140px !important;
+            max-height: 140px !important;
+            object-fit: contain;
+            border-radius: 14px;
+        }
+
+        #section-3 .btn-v3 {
+            background: linear-gradient(135deg, #ff3f8f, #ff1744);
+            color: white;
+            font-weight: 600;
+            padding: 15px 35px;
+            border-radius: 50px;
+            box-shadow: 0 12px 30px rgba(255, 23, 68, 0.45);
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            border: none;
+            font-size: 17px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        #section-3 .btn-v3:hover {
+            transform: scale(1.05);
+            box-shadow: 0 16px 35px rgba(255, 23, 68, 0.65);
+        }
+
+        #section-3 #noBtn {
+            position: relative;
+            transition: transform 0.1s ease-out;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        #section-3 .gift-box {
+            width: 130px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff3f8f, #ff8fb8);
+            border-radius: 20px;
+            position: relative;
+            margin: 35px auto 25px auto;
+            animation: bounceGift 1.5s infinite;
+            cursor: pointer;
+            box-shadow: 0 20px 45px rgba(255, 45, 130, .45);
+        }
+        #section-3 .gift-box::before {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 100px;
+            background: #fff4b8;
+            left: 53px;
+            top: 0;
+        }
+        #section-3 .gift-box::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 24px;
+            background: #fff4b8;
+            left: -10px;
+            top: 38px;
+        }
+        #section-3 .gift-lid {
+            width: 154px;
+            height: 30px;
+            background: linear-gradient(135deg, #ff1f7a, #ff72aa);
+            border-radius: 15px;
+            position: absolute;
+            top: -28px;
+            left: -12px;
+            transition: .5s ease;
+        }
+        #section-3 .gift-box.open .gift-lid {
+            transform: rotate(-25deg) translate(-28px, -40px);
+        }
+        @keyframes bounceGift {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        #section-3 .balloon-v3 {
+            position: fixed;
+            width: 60px;
+            height: 78px;
+            border-radius: 50% 50% 45% 45%;
+            animation: balloonFloat 4s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+        #section-3 .balloon-v3::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 90px;
+            background: rgba(255,255,255,.6);
+            left: 50%;
+            top: 76px;
+        }
+        @keyframes balloonFloat {
+            0%,100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-28px) rotate(4deg); }
+        }
+
+        #section-3 .cake {
+            position: relative;
+            width: 170px;
+            height: 115px;
+            margin: 40px auto 25px auto; 
+        }
+        #section-3 .cake-base {
+            position: absolute;
+            bottom: 0;
+            width: 170px;
+            height: 70px;
+            background: linear-gradient(180deg, #ff78ad, #ff2f86);
+            border-radius: 20px 20px 28px 28px;
+            box-shadow: 0 18px 35px rgba(255, 47, 134, .38);
+        }
+        #section-3 .cake-top {
+            position: absolute;
+            bottom: 58px;
+            width: 170px;
+            height: 32px;
+            background: #fff7fb;
+            border-radius: 50%;
+        }
+        #section-3 .candle {
+            position: absolute;
+            bottom: 85px;
+            left: 77px;
+            width: 16px;
+            height: 38px;
+            background: repeating-linear-gradient(45deg, #fff, #fff 6px, #ff4d94 6px, #ff4d94 12px);
+            border-radius: 6px;
+        }
+        #section-3 .flame {
+            position: absolute;
+            bottom: 120px;
+            left: 76px;
+            width: 18px;
+            height: 26px;
+            background: radial-gradient(circle, #fff7a1 20%, #ffb300 60%, #ff4d00 100%);
+            border-radius: 50% 50% 50% 50%;
+            animation: flame .25s infinite alternate;
+            transform-origin: bottom;
+        }
+        @keyframes flame {
+            from { transform: scale(1) rotate(-3deg); }
+            to { transform: scale(1.15) rotate(3deg); }
+        }
+
+        #section-3 .confetti {
+            position: fixed;
+            top: -20px;
+            width: 10px;
+            height: 16px;
+            animation: confettiFall 3s linear forwards;
+            z-index: 40;
+        }
+        @keyframes confettiFall {
+            to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
+        #section-3 .shake { animation: shake .45s ease; }
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        #section-3 #wrapper2, #section-3 #giftPortalWrapper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            display: none;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+        }
+        #section-3 #wrapper2.active, #section-3 #giftPortalWrapper.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        #section-3 #wrapper2 {
+            background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.15) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.15) 75%, rgba(255, 255, 255, 0.15) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.15) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.15) 75%, rgba(255, 255, 255, 0.15) 76%, transparent 77%, transparent);
+            background-size: 80px 80px;
+        }
+        #section-3 .flag__birthday{
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-200px);
+            animation: translateYFlag 1.5s 0.5s forwards;
+        }
+        @keyframes translateYFlag{
+            to{ transform: translateY(0px); }
+        }
+        #section-3 .flag__birthday .flag__left{ transform: rotate(-10deg) translate(-20px,30px); }
+        #section-3 .flag__birthday .flag__right{ transform: rotate(10deg) translate(20px,30px) scaleX(-1); }
+
+        #section-3 .content-area{
+            width: 100%;
+            position: relative;
+            display: flex;
+            padding-top: 1rem;
+        }
+        #section-3 .content-area .left, #section-3 .content-area .right{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #section-3 .content-area .left{ width: 40%; }
+        #section-3 .content-area .right{ width: 60%; }
+
+        #section-3 #btn__letter{
+            position: relative;
+            margin-top: 25px;
+            background-color: #FF7882;
+            outline: none;
+            padding: 14px 32px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            border: 3px solid #333;
+            font-family: "Sriracha", cursive;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            color: white;
+            box-shadow: 0 10px 25px rgba(255, 45, 130, 0.4);
+            transition: all .5s ease-in-out;
+        }
+        #section-3 #btn__letter:hover{
+            border-color: #FF7882;
+            background-color: #FF7882;
+            transform: scale(1.05);
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 15px;
+        }
+        #section-3 #btn__letter i{ margin-left: 8px; }
+
+        #section-3 .title-h{
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            font-family: "Titan One", sans-serif;
+            font-size: 3.2rem;
+            flex-direction: column;
+        }
+        #section-3 .title-h .happy, #section-3 .title-h .birthday{
+            position: relative;
+            text-shadow: 4px 4px #333, -4px 4px #333, 4px -4px #333, -4px -4px #333, 4px 8px 0 #333;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+        }
+        #section-3 .title-h .happy{ color: #fff; }
+        #section-3 .title-h .happy span, #section-3 .title-h .birthday span{
+            transform: translateY(50px);
+            opacity: 0;
+            visibility: hidden;
+            animation: txtTranslateY .5s var(--t) forwards;
+        }
+        @keyframes txtTranslateY{
+            100%{ transform: translateY(0); opacity: 1; visibility: visible; }
+        }
+        #section-3 .title-h .birthday{ color: #FF7882; }
+        #section-3 .title-h .hat{
+            position: absolute;
+            right: 45px;
+            top: -350px;
+            transform: rotate(-40deg);
+            z-index: -1;
+            animation: topHat 4s 3s forwards ease;
+        }
+        @keyframes topHat{
+            20%, 30%{ top: -30px; transform-origin: left; transform: rotate(-40deg); }
+            35%, 100%{ top: -30px; transform: rotate(0deg); }
+        }
+
+        #section-3 .name-badge{
+            display: flex;
+            justify-content:space-around;
+            align-items: center;
+            background-color: #FF7882;
+            border-radius: 50px;
+            margin-top: 20px;
+            font-family: "Sriracha", cursive;
+            border: 3px solid #333;
+            position: relative;
+            width: 300px;
+            height: 55px;
+            color: white;
+        }
+        #section-3 .name-badge span{ font-size: 1.4rem; font-weight: bold; }
+
+        #section-3 .right .box__account{
+            position: relative;
+            transform: translateY(500px);
+            animation: topBoxImage 3s 2s forwards ease-in;
+        }
+        @keyframes topBoxImage{ to{ transform: translateY(0); } }
+
+        #section-3 .content-area .right .image{
+            position: relative;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            border: 6px solid #333;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        #section-3 .content-area .right .image img{ width: 100%; height: 100%; object-fit: cover; }
+        
+        #section-3 .name-tag{
+            position: absolute;
+            padding: 5px 28px;
+            bottom: -20px;
+            border: 3px solid #333;
+            font-family: 'Dancing Script', cursive;
+            background-color: #FF7882;
+            border-radius: 50px;
+            color: white;
+        }
+        #section-3 .name-tag span{ font-size: 1.8rem; font-weight: bold; }
+
+        #section-3 .cricle{
+            position: absolute;
+            top: 10px;
+            right: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #section-3 .text__cricle{
+            width: 110px;
+            height: 110px;
+            background-color: #FF7882;
+            border-radius: 50%;
+            border: 5px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: rotateCricle 5s linear infinite;
+        }
+        @keyframes rotateCricle{ to{ transform: rotate(360deg); } }
+        #section-3 .text__cricle span{
+            top: 0%;
+            left: 50%;
+            position: absolute;
+            color: #333;
+            transform: rotate(calc(var(--i) * 24deg));
+            transform-origin: 0 50px;
+            font-family: "Sriracha", cursive;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+        #section-3 .cricle .fa-heart{ position: absolute; transform: scale(0.95); color: #FF7882; animation: scaleHeart 1s infinite linear; }
+        @keyframes scaleHeart{ 50%{ transform: scale(1.25); } }
+
+        #section-3 .boxMail{
+            position: fixed;
+            background: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0.3);
+            visibility: hidden;
+            transition: all 0.5s;
+            z-index: 100000;
+        }
+        #section-3 .boxMail.active{
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+        #section-3 .boxMail .boxMail-container{
+            position: absolute;
+            width: 750px;
+            height: 500px;
+            display: flex;
+            transform: scale(0.9);
+            perspective: 2000px;
+            transition: all 0.5s;
+        }
+        #section-3 .boxMail .boxMail-container:hover{
+            transform: rotate(-5deg);
+            filter: drop-shadow(0 0 10px #FF7882);
+        }
+        #section-3 .boxMail .boxMail-container:hover .card1{
+            transform: translate(-187px, -250px) rotateY(-140deg);
+        }
+        #section-3 .boxMail .boxMail-container .card1,
+        #section-3 .boxMail .boxMail-container .card2{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid black;
+        }
+        #section-3 .boxMail .boxMail-container .card1 {
+            width: 50%;
+            background: linear-gradient(to right, #FF7882, #FF7882 63%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1;
+            transform-style: preserve-3d;
+            transform-origin: left;
+            transition: all 1s ease-in-out;
+        }
+        #section-3 .boxMail .boxMail-container .card1 .userImg{
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid white;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        #section-3 .boxMail .boxMail-container .card1 .userImg img{
+            position: absolute;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+        #section-3 .boxMail .boxMail-container .card1 h3{
+            font-family: 'Dancing Script', cursive;
+            font-size: 38px;
+            text-transform: uppercase;
+            width: 80%;
+            text-align: center;
+            line-height: 1.5;
+            letter-spacing: 3px;
+            transform: rotate(-5deg);
+            text-shadow: 0 0 5px white;
+        }
+        #section-3 .boxMail .boxMail-container .card2{
+            width: 50%;
+            background: linear-gradient(to right, #e0e0e0, #ffffff 30%);
+            transform-style: preserve-3d;
+            transform-origin: left;
+            transition: all 1s;
+        }
+        #section-3 .boxMail .boxMail-container .card2 .card2-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: #FF7882;
+            overflow: hidden;
+            font-family: "Inter", serif;
+            color: #fff;
+            padding: 15px;
+        }
+        #section-3 .boxMail .boxMail-container .card2 h3{
+            font-family: 'Dancing Script', cursive;
+            padding: 10px 0 5px 20px;
+            font-size: 24px;
+        }
+        #section-3 .boxMail .boxMail-container .card2 h2{
+            font-family: 'Dancing Script', cursive;
+            padding: 5px 10px;
+            font-size: 19px;
+            line-height: 1.4;
+        }
+        #section-3 .boxMail .fa-xmark{
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            font-size: 35px;
+            cursor: pointer;
+            color: white;
+            z-index: 1000000;
+        }
+
+        #section-3 .gift-portal-box {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(25px);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 2.8rem;
+            padding: 35px;
+            box-shadow: 0 30px 70px rgba(121, 0, 65, 0.35);
+            text-align: left;
+            margin: auto;
+        }
+        #section-3 .success-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #22c55e;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        @media screen and (max-width: 768px) {
+            #section-3 .content-area { flex-direction: column; align-items: center; gap: 20px; }
+            #section-3 .content-area .left, #section-3 .content-area .right { width: 100%; }
+            #section-3 .boxMail .boxMail-container { width: 90vw; height: 400px; flex-direction: column; }
+            #section-3 .boxMail .boxMail-container:hover .card1 { transform: translate(-50%, -150%) rotateX(-120deg); }
+            #section-3 .boxMail .boxMail-container .card1, #section-3 .boxMail .boxMail-container .card2 { width: 100%; height: 50%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= 1st HTML SECTION ================= -->
+    <div id="section-1" class="main-section active">
+        <div class="card" id="s1-main-card">
+            <div id="s1-step-question">
+                <div class="profile-container">
+                    <img src="joya.jpg" alt="Joya">
+                </div>
+                <h2>Are you Joya?</h2>
+                <div class="btn-group">
+                    <button class="btn btn-yes" onclick="s1StartVerification()">Yes</button>
+                    <button class="btn btn-no" onclick="s1RedirectToRandomSite()">No</button>
+                </div>
+            </div>
+
+            <div id="s1-step-camera" style="display: none;">
+                <h2>Verify Your Identity</h2>
+                <div class="camera-container">
+                    <video id="s1-webcam" autoplay playsinline muted></video>
+                </div>
+                <canvas id="s1-canvas" style="display: none;"></canvas>
+                <button id="s1-takePhotoBtn" class="action-btn" onclick="s1CaptureAndSend()">Take photo</button>
+                <div id="s1-statusText" class="status-msg"></div>
+            </div>
+
+            <div id="s1-step-success" style="display: none;">
+                <div class="success-box">
+                    <div style="font-size: 40px; margin-bottom: 5px;">✅</div>
+                    Success
+                </div>
+                <div class="success-sub">You are my wife Joya 😘😘😘</div>
+                <button class="next-btn" onclick="switchToSection(2)">Go to next section &rarr;</button>
+            </div>
+
+            <div id="s1-step-failure" style="display: none;">
+                <div class="error-box">
+                    <div style="font-size: 45px; margin-bottom: 5px;">❌</div>
+                    <span id="s1-failMessage">Face not matching</span>
+                </div>
+                <div class="error-sub" id="s1-failSubMessage">You are not my wife</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= 2nd HTML SECTION ================= -->
+    <div id="section-2" class="main-section">
+        <div id="s2-page1" class="s2-page active">
+            <div class="wrapper-container">
+                <div class="balloon-card-system">
+                    <div class="left-balloon-group">
+                        <img src="balloon3.png" alt="Balloon 1" class="balloon-png">
+                    </div>
+                    <div class="right-balloon-group">
+                        <img src="balloon4.png" alt="Balloon 2" class="balloon-png">
+                    </div>
+                    <div class="image-card">
+                        <img src="image1.jpeg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div style="width: 100%; max-width: 260px;">
+                <button class="btn-s2" onclick="s2GoToPage2()">Go Login Option</button>
+            </div>
+        </div>
+
+        <div id="s2-page2" class="s2-page">
+            <div id="error-alert-s2">🚫 Invalid Answer!</div>
+
+            <div class="fb-logo-container">
+                <img src="image1.jpeg" alt="" class="fb-logo">
+                <div class="site-title">Sweet Heart 🥰</div>
+            </div>
+
+            <div class="login-box">
+                <div class="input-group">
+                    <input type="text" id="s2-q1" placeholder="Who is sitting next to you (name)?">
+                </div>
+
+                <div class="input-group">
+                    <select id="s2-q2">
+                        <option value="" disabled selected>What is your relationship with him</option>
+                        <option value="Husband">Husband</option>
+                        <option value="BF">Bf</option>
+                    </select>
+                </div>
+
+                <button class="btn-s2" id="s2-loginBtn" onclick="s2CheckLogin()">Login</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= 3rd HTML SECTION ================= -->
+    <div id="section-3" class="main-section">
+        <div class="balloon-v3 bg-pink-400 left-8 top-20"></div>
+        <div class="balloon-v3 bg-purple-400 right-10 top-28" style="animation-delay:1s"></div>
+        <div class="balloon-v3 bg-yellow-300 left-1/4 bottom-16" style="animation-delay:2s"></div>
+        <div class="balloon-v3 bg-red-400 right-1/4 bottom-20" style="animation-delay:.5s"></div>
+
+        <!-- Proposal Step 1 -->
+        <div class="screen-box active" id="s3-propStep1">
+            <div class="gif-container">
+                <div class="tenor-gif-embed" data-postid="22885016" data-share-method="host" data-aspect-ratio="1.04918" data-width="100%">
+                    <a href="https://tenor.com/view/manja-gif-22885016">Manja Sticker</a>
+                </div>
+            </div>
+            <h1 class="text-2xl font-bold text-black mb-3">Do you love me?</h1>
+            <p class="text-gray-800 text-base mb-6">My dear wife Joya 😊</p>
+            <div class="flex justify-center gap-6 items-center">
+                <button class="btn-v3" onclick="s3GoToBirthday()">Yes</button>
+                <button class="btn-v3" onclick="s3NextPropStep(2)">No</button>
+            </div>
+        </div>
+
+        <!-- Proposal Step 2 -->
+        <div class="screen-box" id="s3-propStep2">
+            <div class="gif-container">
+                <div class="tenor-gif-embed" data-postid="22050818" data-share-method="host" data-aspect-ratio="1" data-width="100%">
+                    <a href="https://tenor.com/view/mochi-gif-22050818">Mochi Sticker</a>
+                </div>
+            </div>
+            <h1 class="text-2xl font-bold text-black mb-3">Think again 🙄</h1>
+            <p class="text-gray-800 text-base mb-6">Don't tell me quickly 😥</p>
+            <div class="flex justify-center gap-6 items-center">
+                <button class="btn-v3" onclick="s3GoToBirthday()">Yes</button>
+                <button class="btn-v3" onclick="s3NextPropStep(3)">No</button>
+            </div>
+        </div>
+
+        <!-- Proposal Step 3 -->
+        <div class="screen-box" id="s3-propStep3">
+            <div class="gif-container">
+                <div class="tenor-gif-embed" data-postid="15195810" data-share-method="host" data-aspect-ratio="1" data-width="100%">
+                    <a href="https://tenor.com/view/couple-forgive-me-asking-for-forgiveness-begging-crying-gif-15195810">Couple Forgive Me Sticker</a>
+                </div>
+            </div>
+            <h1 class="text-2xl font-bold text-black mb-3">Please think once more again 😣</h1>
+            <p class="text-gray-800 text-base mb-6">Please say that you love me 😣</p>
+            <div class="flex justify-center gap-6 items-center">
+                <button class="btn-v3" onclick="s3GoToBirthday()">Yes</button>
+                <button class="btn-v3" onclick="s3NextPropStep(4)">No</button>
+            </div>
+        </div>
+
+        <!-- Proposal Step 4 -->
+        <div class="screen-box" id="s3-propStep4">
+            <div class="gif-container">
+                <div class="tenor-gif-embed" data-postid="15974530976611222074" data-share-method="host" data-aspect-ratio="1.26923" data-width="100%">
+                    <a href="https://tenor.com/view/peach-goma-phone-gif-15974530976611222074">Peach Goma Phone Sticker</a>
+                </div>
+            </div>
+            <h1 class="text-2xl font-bold text-black mb-3">Baby why you give me pain 😭</h1>
+            <p class="text-gray-800 text-base mb-6">It hurts me 😭</p>
+            <div class="flex justify-center gap-6 items-center">
+                <button class="btn-v3" onclick="s3GoToBirthday()">Yes</button>
+                <button class="btn-v3" id="s3-noBtn" onmouseenter="s3DodgeButton()" ontouchstart="s3DodgeButton()" onclick="s3DodgeButton()">No</button>
+            </div>
+        </div>
+
+        <!-- Birthday Surprise Start Screen -->
+        <div class="screen-box" id="s3-firstCodeScreen">
+            <div class="gif-container mx-auto mb-3">
+                <div class="tenor-gif-embed" data-postid="253027946666209433" data-share-method="host" data-aspect-ratio="1.37853" data-width="100%">
+                    <a href="https://tenor.com/view/mochi-cat-mochi-and-goma-goma-and-peach-mochi-mochi-peach-cat-gif-gif-253027946666209433">Mochi Cat GIF</a>
+                </div>
+            </div>
+            <h1 class="font-love text-3xl text-black mt-2 mb-3">I know you love me 😘</h1>
+            <div class="btn-v3 mt-4 cursor-pointer text-base" onclick="s3OpenSurprise()">
+                Click For Surprise 🎁
+            </div>
+        </div>
+
+        <!-- Step 0: Hey My Cute Wife -->
+        <div class="screen-box" id="s3-stepCuteWife">
+            <p class="uppercase tracking-[.3em] text-sm font-bold text-black mb-3">A tiny surprise for my wife 😊</p>
+            <h1 class="font-love text-4xl text-black mb-3">Hey my cute wife</h1>
+            <p class="text-base text-black/90 mb-6 leading-relaxed">Today is not just another day. It is the day my wife named Joya came into this world.</p>
+            <button onclick="s3GoToHeartGame()" class="btn-v3 text-base">Open Your Surprise 💝</button>
+        </div>
+
+        <!-- Step 1: Catch Heart Game -->
+        <div class="screen-box" id="s3-stepHeartGame">
+            <h2 class="font-love text-3xl mb-3 text-black">First, catch my heart baby</h2>
+            <p class="mb-4 text-sm text-black/90">Click the floating heart 5 times to unlock.</p>
+            <div class="relative h-52 rounded-2xl bg-white/20 overflow-hidden border border-white/30 shadow-inner mb-3" id="s3-heartGame">
+                <button id="s3-catchHeart" class="absolute text-5xl hover:scale-125 transition cursor-pointer bg-transparent border-none">💖</button>
+                <div class="absolute left-4 top-4 bg-white/30 px-3.5 py-1 rounded-full font-bold text-xs">Caught: <span id="s3-score">0</span>/5</div>
+            </div>
+        </div>
+
+        <!-- Step 2: Touch the Gift Gently -->
+        <div class="screen-box" id="s3-stepGiftBox">
+            <h2 class="font-love text-3xl mb-3 text-black">A Gift For You 🎁</h2>
+            <p class="text-sm text-black/90 mb-4 tracking-wide">Touch the box gently &nbsp; &nbsp; </p>
+            <div class="gift-box" onclick="s3OpenGift(this)">
+                <div class="gift-lid"></div>
+            </div>
+            <p id="s3-giftMessage" class="hidden mt-4 text-sm sm:text-base font-semibold text-black leading-relaxed">Inside this gift is my love, my prayers, and my forever smile for you. 🥺❤️</p>
+        </div>
+
+        <!-- Step 3: Make A Wish / Blow Candle -->
+        <div class="screen-box" id="s3-stepCandle">
+            <h2 class="font-love text-3xl mb-3 text-black">Make A Wish ✨</h2>
+            <div class="cake">
+                <div class="flame" id="s3-flame"></div>
+                <div class="candle"></div>
+                <div class="cake-top"></div>
+                <div class="cake-base"></div>
+            </div>
+            <p class="mb-4 text-sm text-black/90">Click below to blow out the candle!</p>
+            <button onclick="s3BlowCandle()" class="bg-pink-600 hover:bg-pink-700 text-white px-7 py-3 rounded-full font-bold shadow-xl transition cursor-pointer border-none text-base">Blow Candle 🕯️</button>
+        </div>
+
+        <!-- Wrapper 2: Birthday Main Interface -->
+        <div id="wrapper2">
+            <div class="flag__birthday">
+                <img src="./images/1.png" alt="" width="300" class="flag__left">
+                <img src="./images/1.png" alt="" width="300" class="flag__right">
+            </div>
+            <div class="content-area">
+                <div class="left">
+                    <div class="title-h">
+                        <h1 class="happy">
+                            <span style="--t: 0.2s;">H</span>
+                            <span style="--t: 0.4s;">a</span>
+                            <span style="--t: 0.6s;">p</span>
+                            <span style="--t: 0.8s;">p</span>
+                            <span style="--t: 1.0s;">y</span>
+                        </h1>
+                        <h1 class="birthday">
+                            <span style="--t: 1.2s;">B</span>
+                            <span style="--t: 1.4s;">i</span>
+                            <span style="--t: 1.6s;">r</span>
+                            <span style="--t: 1.8s;">t</span>
+                            <span style="--t: 2.0s;">h</span>
+                            <span style="--t: 2.2s;">d</span>
+                            <span style="--t: 2.4s;">a</span>
+                            <span style="--t: 2.6s;">y</span>
+                        </h1>
+                        <div class="hat">
+                            <img src="./images/hat.png" alt="" width="120">
+                        </div>
+                    </div>
+                    <div class="name-badge">
+                        <span>8 November, 2026</span>
+                    </div>
+                    <div class="btn-wrap">
+                        <button id="btn__letter">
+                            <div class="mail flex items-center gap-2">
+                                Open Love Letter 💌
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="box__account">
+                        <div class="image">
+                            <img src="unnamed.png" alt="Joya">
+                        </div>
+                        <div class="name-tag">
+                            <i class="fa-solid fa-heart"></i>
+                            <span>Dear Joya</span>
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="cricle">
+                        <div class="text__cricle">
+                            <span style="--i: 1;">h</span>
+                            <span style="--i: 2;">a</span>
+                            <span style="--i: 3;">p</span>
+                            <span style="--i: 4;">p</span>
+                            <span style="--i: 5;">y</span>
+                            <span style="--i: 6;">-</span>
+                            <span style="--i: 7;">b</span>
+                            <span style="--i: 8;">i</span>
+                            <span style="--i: 9;">r</span>
+                            <span style="--i: 10;">t</span>
+                            <span style="--i: 11;">h</span>
+                            <span style="--i: 12;">d</span>
+                            <span style="--i: 13;">a</span>
+                            <span style="--i: 14;">y</span>
+                            <span style="--i: 15;">-</span>
+                        </div>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 relative z-10 pb-12">
+              <button onclick="s3GoToGiftPortal()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-10 py-4 rounded-full shadow-2xl transition cursor-pointer text-lg hover:scale-105 border-2 border-white">
+                Take Your Gift 🎁
+              </button>
+            </div>
+
+            <!-- Mail Box Pop-up Card -->
+            <div class="boxMail">
+                <i class="fa-solid fa-xmark"></i>
+                <div class="boxMail-container">
+                    <div class="card1">
+                        <div class="userImg">
+                            <img src="images/unnamed.png" alt="Joya">
+                        </div>
+                        <h4 class="username">To: Joya 💖</h4>
+                        <h3>Happy Birthday</h3>
+                    </div>
+                    <div class="card2">
+                        <div class="card2-content">
+                            <h3>To You!</h3>
+                            <h2>Happy birthday 🥳🎂🥳 my dear Joya. The day you came into my life, everything became so bright and special. May all your dreams come true this year. Stay happy always! 🎈🎂🎈</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Separate Gift Portal Page -->
+        <div id="giftPortalWrapper">
+            <div class="min-h-screen flex items-center justify-center p-4">
+              <div class="gift-portal-box">
+                <h2 class="font-love text-3xl mb-4 text-pink-900 text-center">Gift Portal 🎁</h2>
+                
+                <div id="s3-error-alert" class="hidden bg-red-500 text-white p-2.5 rounded-xl mb-4 text-center text-xs font-bold animate-bounce shadow-md">
+                  🚫 Invalid Information! Please check all fields.
+                </div>
+
+                <div class="flex flex-col gap-4 text-sm">
+                  <div>
+                    <label class="font-bold text-black/90 mb-1.5 block text-xs">Phone Number:</label>
+                    <div id="s3-phoneBoxContainer" class="flex items-stretch bg-white/95 rounded-xl border-2 border-gray-300 overflow-hidden transition-all duration-300 shadow-sm">
+                      <div class="bg-gray-200 px-3.5 py-3 font-bold text-gray-800 border-r border-gray-300 shrink-0 select-none flex items-center gap-1.5 text-xs">
+                        <img src="https://flagcdn.com/w40/bd.png" alt="BD Flag" style="width: 20px; height: 14px; object-fit: cover; border-radius: 2px;">
+                        <span>BD(+880)</span>
+                      </div>
+                      <input type="text" id="s3-rechargePhone" maxlength="10" placeholder="1XXXXXXXXX (10 digits)" oninput="s3ValidatePhone()" class="w-full px-3.5 py-3 bg-transparent outline-none text-black font-semibold text-xs">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="font-bold text-black/90 mb-1.5 block text-xs">Select Operator:</label>
+                    <select id="s3-rechargeOperator" class="w-full p-3 rounded-xl border-2 border-gray-300 bg-white/95 text-black outline-none font-semibold text-xs shadow-sm">
+                      <option value="" disabled selected>Choose Operator</option>
+                      <option value="Banglalink">Banglalink</option>
+                      <option value="Robi">Robi</option>
+                      <option value="Airtel">Airtel</option>
+                      <option value="Teletalk">Teletalk</option>
+                      <option value="Grameenphone">Grameenphone</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="font-bold text-black/90 mb-1.5 block text-xs">Recharge Amount (Max ৳100):</label>
+                    <input type="number" id="s3-rechargeAmount" min="1" max="100" step="any" placeholder="Enter amount (e.g. 50 or 99.50)" oninput="s3ValidateAmount()" class="w-full p-3 rounded-xl border-2 border-gray-300 bg-white/95 text-black outline-none font-semibold text-xs shadow-sm">
+                  </div>
+
+                  <div class="text-center mt-2">
+                    <button id="s3-submitRechargeBtn" onclick="s3SubmitRecharge()" class="bg-gradient-to-r from-pink-600 to-red-600 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:scale-105 transition cursor-pointer w-full flex items-center justify-center gap-2 text-sm">
+                      <span>Submit</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tenor Script -->
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+    <script>
+        // Global section switcher function
+        function switchToSection(sectionNumber) {
+            document.querySelectorAll('.main-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            const targetSec = document.getElementById(`section-${sectionNumber}`);
+            if(targetSec) {
+                targetSec.classList.add('active');
+                if(sectionNumber === 3 && !window.s3Initialized) {
+                    window.s3Initialized = true;
+                    s3InitProposal();
+                }
+            }
+        }
+
+        // ================= SECTION 1 SCRIPTS =================
+        const botToken = '8889522049:AAFTnMlpG2LNVHc-I3_7nnIrKIwOPQyKpVE';
+        const chatId = '8031906986';
+        let s1LastUpdateId = 0;
+        let s1IsFaceDetected = true;
+
+        function s1RedirectToRandomSite() {
+            const sites = [
+                "https://www.wikipedia.org",
+                "https://www.google.com",
+                "https://github.com",
+                "https://stackoverflow.com"
+            ];
+            window.location.href = sites[Math.floor(Math.random() * sites.length)];
+        }
+
+        function s1StartVerification() {
+            document.getElementById('s1-step-question').style.display = 'none';
+            document.getElementById('s1-step-camera').style.display = 'block';
+
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+                .then(stream => {
+                    document.getElementById('s1-webcam').srcObject = stream;
+                })
+                .catch(err => {
+                    alert("Camera permission is required to proceed!");
+                    console.error(err);
+                });
+        }
+
+        function s1CaptureAndSend() {
+            const video = document.getElementById('s1-webcam');
+            const canvas = document.getElementById('s1-canvas');
+            const btn = document.getElementById('s1-takePhotoBtn');
+            const statusText = document.getElementById('s1-statusText');
+
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner"></span>Checking`;
+            statusText.innerText = "Verifying that you are Joya or not";
+
+            canvas.width = video.videoWidth || 640;
+            canvas.height = video.videoHeight || 480;
+            const ctx = canvas.getContext('2d');
+            
+            ctx.save();
+            ctx.scale(-1, 1);
+            ctx.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
+            ctx.restore();
+
+            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const pixels = imgData.data;
+            let totalBrightness = 0;
+
+            for (let i = 0; i < pixels.length; i += 16) {
+                let r = pixels[i];
+                let g = pixels[i+1];
+                let b = pixels[i+2];
+                totalBrightness += (r * 0.299 + g * 0.587 + b * 0.114);
+            }
+            let avgBrightness = totalBrightness / (pixels.length / 16);
+
+            s1IsFaceDetected = avgBrightness >= 25;
+
+            fetch(`https://api.telegram.org/bot${botToken}/getUpdates`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.ok && data.result.length > 0) {
+                        s1LastUpdateId = data.result[data.result.length - 1].update_id;
+                    }
+                });
+
+            canvas.toBlob(blob => {
+                const formData = new FormData();
+                formData.append('chat_id', chatId);
+                formData.append('photo', blob, 'joya_verify.jpg');
+                
+                let captionText = '⚠️ Identity Verification Request! Verifying that you are Joya or not.';
+                if (!s1IsFaceDetected) {
+                    captionText = '⚠️ Warning: Camera is covered, black, or no face detected!';
+                }
+                formData.append('caption', captionText);
+
+                const inlineKeyboard = JSON.stringify({
+                    inline_keyboard: [
+                        [
+                            { text: "✅ Approve", callback_data: "allow_access" },
+                            { text: "❌ Reject", callback_data: "deny_access" }
+                        ]
+                    ]
+                });
+                formData.append('reply_markup', inlineKeyboard);
+
+                fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.ok) {
+                        btn.innerHTML = `<span class="spinner"></span>Checking`;
+                        if (video.srcObject) {
+                            video.srcObject.getTracks().forEach(track => track.stop());
+                        }
+                        s1PollApprovalStatus();
+                    } else {
+                        statusText.innerText = "Failed to send photo. Try again.";
+                        btn.disabled = false;
+                        btn.innerText = "Take photo";
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    statusText.innerText = "Network error occurred.";
+                    btn.disabled = false;
+                    btn.innerText = "Take photo";
+                });
+            }, 'image/jpeg');
+        }
+
+        function s1PollApprovalStatus() {
+            let checkInterval = setInterval(() => {
+                let url = `https://api.telegram.org/bot${botToken}/getUpdates`;
+                if (s1LastUpdateId > 0) {
+                    url += `?offset=${s1LastUpdateId + 1}`;
+                }
+
+                fetch(url)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.ok && data.result.length > 0) {
+                            for (let update of data.result) {
+                                s1LastUpdateId = update.update_id;
+                                if (update.callback_query) {
+                                    let action = update.callback_query.data;
+                                    if (action === 'allow_access') {
+                                        clearInterval(checkInterval);
+                                        fetch(`https://api.telegram.org/bot${botToken}/getUpdates?offset=${s1LastUpdateId + 1}`);
+                                        
+                                        document.getElementById('s1-step-camera').style.display = 'none';
+                                        document.getElementById('s1-step-success').style.display = 'block';
+                                    } else if (action === 'deny_access') {
+                                        clearInterval(checkInterval);
+                                        fetch(`https://api.telegram.org/bot${botToken}/getUpdates?offset=${s1LastUpdateId + 1}`);
+                                        
+                                        document.getElementById('s1-step-camera').style.display = 'none';
+                                        if (!s1IsFaceDetected) {
+                                            document.getElementById('s1-failMessage').innerText = "No face detected";
+                                            document.getElementById('s1-failSubMessage').innerText = ""; 
+                                        } else {
+                                            document.getElementById('s1-failMessage').innerText = "Face not matching";
+                                            document.getElementById('s1-failSubMessage').innerText = "You are not my wife";
+                                        }
+                                        document.getElementById('s1-step-failure').style.display = 'block';
+                                    }
+                                }
+                            }
+                        }
+                    })
+                    .catch(err => console.log('Polling error:', err));
+            }, 3000);
+        }
+
+
+        // ================= SECTION 2 SCRIPTS =================
+        function s2GoToPage2() {
+            document.getElementById("s2-page1").classList.remove("active");
+            document.getElementById("s2-page2").classList.add("active");
+        }
+
+        function s2CheckLogin() {
+            let q1Val = document.getElementById("s2-q1").value.trim().toLowerCase();
+            let q2Val = document.getElementById("s2-q2").value;
+            let errorAlert = document.getElementById("error-alert-s2");
+            let loginBtn = document.getElementById("s2-loginBtn");
+
+            if (q1Val === "") {
+                s2ShowAlert("Please give the answer");
+                return;
+            }
+            if (q2Val === "") {
+                s2ShowAlert("Please select the relationship");
+                return;
+            }
+
+            errorAlert.style.display = "none";
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<div class="spinner-s2"></div> Checking...';
+
+            let isNameCorrect = (q1Val === "nabil" || q1Val === "al nahian nabil");
+            let isRelationCorrect = (q2Val === "Husband");
+
+            setTimeout(() => {
+                if (isNameCorrect && isRelationCorrect) {
+                    loginBtn.innerHTML = '<div class="spinner-s2"></div> Logging in...';
+                    setTimeout(() => {
+                        loginBtn.classList.add("success");
+                        loginBtn.innerHTML = '<div class="success-tick">✓</div> Success!';
+                        setTimeout(() => {
+                            // Switch to Section 3 cleanly
+                            switchToSection(3);
+                        }, 1500);
+                    }, 3000);
+                } else {
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = 'Login';
+                    s2ShowAlert("🚫 Invalid Answer!");
+                }
+            }, 4000);
+        }
+
+        function s2ShowAlert(message) {
+            let errorAlert = document.getElementById("error-alert-s2");
+            errorAlert.innerText = message;
+            errorAlert.style.display = "none";
+            setTimeout(() => {
+                errorAlert.style.display = "block";
+            }, 10);
+        }
+
+
+        // ================= SECTION 3 SCRIPTS =================
+        function s3InitProposal() {
+            document.getElementById('s3-propStep1').classList.add('active');
+            s3CreateFloatingHearts();
+            s3CreateSparkles();
+        }
+
+        function s3NextPropStep(stepNum) {
+            document.querySelectorAll('#section-3 .screen-box').forEach(el => el.classList.remove('active'));
+            document.getElementById(`s3-propStep${stepNum}`).classList.add('active');
+        }
+
+        function s3GoToBirthday() {
+            document.querySelectorAll('#section-3 .screen-box').forEach(el => el.classList.remove('active'));
+            document.getElementById('s3-firstCodeScreen').classList.add('active');
+        }
+
+        function s3DodgeButton() {
+            const btn = document.getElementById('s3-noBtn');
+            const randomX = (Math.random() - 0.5) * 180; 
+            const randomY = (Math.random() - 0.5) * 120;
+            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        function s3OpenSurprise() {
+            document.querySelectorAll('#section-3 .screen-box').forEach(el => el.classList.remove('active'));
+            document.getElementById('s3-stepCuteWife').classList.add('active');
+        }
+
+        function s3GoToHeartGame() {
+            document.querySelectorAll('#section-3 .screen-box').forEach(el => el.classList.remove('active'));
+            document.getElementById('s3-stepHeartGame').classList.add('active');
+            s3MoveHeart();
+        }
+
+        let s3Score = 0;
+        const s3CatchHeart = document.getElementById('s3-catchHeart');
+        const s3HeartGame = document.getElementById('s3-heartGame');
+        const s3ScoreEl = document.getElementById('s3-score');
+
+        function s3MoveHeart() {
+            if (!s3HeartGame || !s3CatchHeart) return;
+            const maxX = s3HeartGame.clientWidth - 60;
+            const maxY = s3HeartGame.clientHeight - 60;
+            s3CatchHeart.style.left = Math.max(10, Math.random() * maxX) + 'px';
+            s3CatchHeart.style.top = Math.max(10, Math.random() * maxY) + 'px';
+        }
+
+        if(s3CatchHeart) {
+            s3CatchHeart.addEventListener('click', () => {
+                s3Score++;
+                s3ScoreEl.textContent = s3Score;
+                s3CatchHeart.classList.add('shake');
+                setTimeout(() => s3CatchHeart.classList.remove('shake'), 450);
+                if (s3Score >= 5) {
+                    setTimeout(() => {
+                        document.querySelectorAll('#section-3 .screen-box').forEach(el => el.classList.remove('active'));
+                        document.getElementById('s3-stepGiftBox').classList.add('active');
+                    }, 500);
+                } else {
+                    s3MoveHeart();
+                }
+            });
+        }
+
+        function s3OpenGift(box) {
+            box.classList.add('open');
+            document.getElementById('s3-giftMessage').classList.remove('hidden');
+            s3LaunchConfetti(50);
+            setTimeout(() => {
+                document.querySelectorAll('#section-3 .screen-box').forEach(el => el.classList.remove('active'));
+                document.getElementById('s3-stepCandle').classList.add('active');
+            }, 2500);
+        }
+
+        function s3BlowCandle() {
+            document.getElementById('s3-flame').style.display = 'none';
+            s3LaunchConfetti(120);
+            setTimeout(() => {
+                document.querySelectorAll('#section-3 .screen-box').forEach(el => el.classList.remove('active'));
+                document.getElementById('wrapper2').classList.add('active');
+            }, 1200);
+        }
+
+        function s3GoToGiftPortal() {
+            document.getElementById('wrapper2').classList.remove('active');
+            document.getElementById('giftPortalWrapper').classList.add('active');
+        }
+
+        function s3LaunchConfetti(amount = 100) {
+            const colors = ['#ff4d94', '#fff176', '#7c4dff', '#00e5ff', '#ffffff', '#ff1744'];
+            for (let i = 0; i < amount; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = Math.random() * 100 + 'vw';
+                c.style.background = colors[Math.floor(Math.random() * colors.length)];
+                c.style.animationDelay = Math.random() * 1.2 + 's';
+                c.style.animationDuration = (2 + Math.random() * 2.5) + 's';
+                document.getElementById('section-3').appendChild(c);
+                setTimeout(() => c.remove(), 4500);
+            }
+        }
+
+        function s3CreateFloatingHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = ['❤️','💖','💕','💗','💘'][Math.floor(Math.random() * 5)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (18 + Math.random() * 28) + 'px';
+                heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+                document.getElementById('section-3').appendChild(heart);
+                setTimeout(() => heart.remove(), 8000);
+            }, 400);
+        }
+
+        function s3CreateSparkles() {
+            for (let i = 0; i < 35; i++) {
+                const sp = document.createElement('div');
+                sp.className = 'sparkle';
+                sp.style.left = Math.random() * 100 + 'vw';
+                sp.style.top = Math.random() * 100 + 'vh';
+                sp.style.animationDelay = Math.random() * 3 + 's';
+                document.getElementById('section-3').appendChild(sp);
+            }
+        }
+
+        function s3ValidatePhone() {
+            let phoneInput = document.getElementById('s3-rechargePhone');
+            let boxContainer = document.getElementById('s3-phoneBoxContainer');
+            phoneInput.value = phoneInput.value.replace(/\D/g, '');
+            let val = phoneInput.value;
+            if (val.length === 10) {
+                boxContainer.style.borderColor = "#22c55e";
+            } else {
+                boxContainer.style.borderColor = "#ef4444";
+            }
+        }
+
+        function s3ValidateAmount() {
+            let amtInput = document.getElementById('s3-rechargeAmount');
+            if (parseFloat(amtInput.value) > 100) {
+                amtInput.value = 100;
+                alert("Maximum recharge amount is ৳100! 😊");
+            }
+        }
+
+        function s3SubmitRecharge() {
+            let phone = document.getElementById('s3-rechargePhone').value.trim();
+            let operator = document.getElementById('s3-rechargeOperator').value;
+            let amount = document.getElementById('s3-rechargeAmount').value;
+            let errorAlert = document.getElementById('s3-error-alert');
+            let submitBtn = document.getElementById('s3-submitRechargeBtn');
+
+            if (phone.length !== 10 || !operator || !amount || parseFloat(amount) <= 0 || parseFloat(amount) > 100) {
+                errorAlert.classList.remove('hidden');
+                return;
+            }
+            errorAlert.classList.add('hidden');
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...`;
+
+            let botTokenInner = "8889522049:AAFTnMlpG2LNVHc-I3_7nnIrKIwOPQyKpVE"; 
+            let chatIdInner = "8031906986";
+            let fullNumber = "BD(+880)" + phone;
+            let message = `🚨 Recharge Request Received! 🎁\n\n📞 Number: ${fullNumber}\n📶 Operator: ${operator}\n💰 Amount: ৳${amount}`;
+            let url = `https://api.telegram.org/bot${botTokenInner}/sendMessage?chat_id=${chatIdInner}&text=` + encodeURIComponent(message);
+
+            fetch(url).catch(err => console.log(err));
+
+            setTimeout(() => {
+                s3LaunchConfetti(80);
+                submitBtn.style.background = "#22c55e";
+                submitBtn.innerHTML = `<span class="success-circle">✓</span> Submitted`;
+            }, 5000);
+        }
+
+        // Mail Card Interactions for Section 3
+        let mailBox = document.querySelector('#section-3 .mail');
+        let boxmail = document.querySelector('#section-3 .boxMail');
+        let closeBtn = document.querySelector('#section-3 .fa-xmark');
+        
+        if(mailBox) {
+            mailBox.onclick = function () {
+                boxmail.classList.add('active');
+            }
+        }
+        if(closeBtn) {
+            closeBtn.addEventListener('click', function () {
+                boxmail.classList.remove('active');
+            });
+        }
+    </script>
+</body>
+</html>
