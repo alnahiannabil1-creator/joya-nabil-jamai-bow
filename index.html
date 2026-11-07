@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All-in-One Page</title>
+    <title>Surprise for You</title>
     
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -38,6 +38,56 @@
             opacity: 1;
             z-index: 10;
         }
+
+        /* ================= INTRO (CUSTOM HACKER LANDING) STYLES ================= */
+        #section-intro {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        #section-intro .intro-container {
+            background: rgba(20, 20, 20, 0.85);
+            border: 1px solid #00ff66;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            text-align: center;
+        }
+        #section-intro .message {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: left;
+            margin-bottom: 25px;
+            white-space: pre-line;
+            color: #d1d1d1;
+        }
+        /* হ্যাকিং স্টাইল নিয়ন গ্রিন বাটন */
+        .hacker-btn {
+            background-color: transparent;
+            color: #00ff66;
+            border: 2px solid #00ff66;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px #00ff66, inset 0 0 10px #00ff66;
+            transition: all 0.3s ease;
+        }
+        .hacker-btn:hover {
+            background-color: #00ff66;
+            color: #0d0d0d;
+            box-shadow: 0 0 20px #00ff66, 0 0 40px #00ff66;
+        }
+
 
         /* ================= SECTION 1 STYLES ================= */
         #section-1 {
@@ -1020,8 +1070,23 @@
 </head>
 <body>
 
+    <!-- ================= INTRO (CUSTOM HACKER LANDING) SECTION ================= -->
+    <div id="section-intro" class="main-section active">
+        <div class="intro-container">
+            <div class="message">হ্যালো আমার ওয়াইফ জয়া, আশা করি ভালো আছো। লিংকে ক্লিক করার জন্য তোমাকে অসংখ্য ধন্যবাদ! এই পেজটি তোমার জন্য অনেক আকর্ষণীয় করে তৈরি করেছি আমি, আর এখানে তোমার জন্য একটি সারপ্রাইজ রয়েছে। যদিও সারপ্রাইজ আগে থেকেই বলে দেওয়া উচিত নয়, তবুও পেজটি ব্যবহারে তোমার যেন কোনো অসুবিধা না হয়, সেজন্য নিচের গাইডলাইনগুলো একটু মনোযোগ দিয়ে পড়ে নাও:
+
+১. প্রথমে তোমার ফোনটি পোর্ট্রেট মোডে (Portrait) ঘুরিয়ে নাও, যাতে দেখতে সুন্দর লাগে। এরপর তুমি জয়া কি না, তা যাচাই করা হবে; এজন্য তোমাকে একটি সেলফি তুলতে হবে। পেজটি যখন তোমার কাছে ক্যামেরা পারমিশন চাইবে, তখন 'Allow' বাটনে ক্লিক করবে।
+২. এরপর তোমাকে লগইন করতে হবে।
+৩. এই পেজে লগইন বাটনের মতো ধাপে ধাপে অনেক বাটন দেখতে পাবে। সেগুলোতে ক্লিক করলে পরবর্তী পেজে যেতে পারবে। পেজে যা লেখা আছে, তা ভালোভাবে পড়ে নেবে।
+৪. সর্বশেষ ধাপে তোমার কাছ থেকে যে যে ইনফরমেশন চাইবে, তা দিয়ে দেবে।</div>
+
+            <!-- হ্যাকিং কালার ও স্টাইলের বাটন (Click to go to Section 1) -->
+            <button class="hacker-btn" onclick="switchToSection(1)">বুঝতে পেরেছি বাবু</button>
+        </div>
+    </div>
+
     <!-- ================= 1st HTML SECTION ================= -->
-    <div id="section-1" class="main-section active">
+    <div id="section-1" class="main-section">
         <div class="card" id="s1-main-card">
             <div id="s1-step-question">
                 <div class="profile-container">
